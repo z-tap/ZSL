@@ -8,9 +8,14 @@ import (
 func main() {
 	api := zsl.NewPublicZSLAPI()
 
-	// zsl.CreateParamsUnshielding()
-	// zsl.CreateParamsUnshielding()
-	// zsl.CreateParamsTransfer()
+	init := false
+
+	if (init) {
+		zsl.CreateParamsUnshielding()
+		zsl.CreateParamsUnshielding()
+		zsl.CreateParamsTransfer()
+	}
+
 
 	keyPair, err := api.GenerateZKeypair()
 	if err != nil {

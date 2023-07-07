@@ -46,7 +46,7 @@ func CreateParamsUnshielding() {
 }
 
 func CreateParamsTransfer() {
-	snark.CreateParamsUnshielding()
+	snark.CreateParamsTransfer()
 }
 
 func prfAddr(dst, ask []byte, t byte) {
