@@ -45,6 +45,10 @@ func CreateParamsUnshielding() {
 	snark.CreateParamsUnshielding()
 }
 
+func CreateParamsTransfer() {
+	snark.CreateParamsUnshielding()
+}
+
 func prfAddr(dst, ask []byte, t byte) {
 	if len(dst) < 32 {
 		panic("prfAddr called with a too small dst")
