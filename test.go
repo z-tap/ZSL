@@ -7,7 +7,6 @@ import (
 
 func main() {
 	api := zsl.NewPublicZSLAPI()
-
 	init := false
 
 	if (init) {
@@ -16,12 +15,7 @@ func main() {
 		zsl.CreateParamsTransfer()
 	}
 
-
 	keyPair, err := api.GenerateZKeypair()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
 	fmt.Println(keyPair)
 
 	result, err := api.DebugShielding()
@@ -34,10 +28,8 @@ func main() {
 	fmt.Println(result_unshield)
 	fmt.Println(err_unshield)
 
-
 	result_shielded_tx, err_shielded_tx := api.DebugShieldedTransfer()
 
 	fmt.Println(result_shielded_tx)
 	fmt.Println(err_shielded_tx)	
-
 }
