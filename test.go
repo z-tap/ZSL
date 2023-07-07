@@ -25,4 +25,10 @@ func main() {
 	fmt.Println(result_unshield)
 	fmt.Println(err_unshield)
 
+
+	result_shielded_tx, err_shielded_tx := api.DebugShieldedTransfer()
+
+	fmt.Println(result_shielded_tx)
+	fmt.Println(err_shielded_tx)	
+
 }
