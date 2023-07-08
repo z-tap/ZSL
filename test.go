@@ -116,7 +116,6 @@ func testShieldOrd() {
 
 	if (result_shielding) {
 		acc.InsertCommitment(cmString)
-		acc.GetWitness(cmString)
 	}
 
 	//TODO: Remove value from circulation with a BRC-20 transfer
