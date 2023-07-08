@@ -3,11 +3,17 @@ package main
 import (
 	"fmt"
 	"example.com/playground/zsl"
+	"example.com/playground/merkle"
 )
 
 func main() {
-	api := zsl.NewPublicZSLAPI()
+
 	init := false
+	api := zsl.NewPublicZSLAPI()
+
+	merkle_depth := uint(29)
+	acc := merkle.InitMerkleApi()
+	acc.Init(merkle_depth)
 
 	if (init) {
 		zsl.CreateParamsUnshielding()
@@ -32,4 +38,5 @@ func main() {
 
 	fmt.Println(result_shielded_tx)
 	fmt.Println(err_shielded_tx)	
+
 }
