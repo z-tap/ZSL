@@ -60,6 +60,7 @@ func (tree *ZSLMerkleTree) combine(left string, right string) string {
 func (tree *ZSLMerkleTree) insertCommitment(commitment string) bool {
 	// check if commitment is already inserted
 	if _, exists := tree.MapCommitIndices[commitment]; exists {
+		fmt.Println("Commitment already exists")
 		return false
 	}
 
@@ -69,10 +70,12 @@ func (tree *ZSLMerkleTree) insertCommitment(commitment string) bool {
 	}
 
 	// Insert the commitment and increment the number of commitments
+	tree.NumCommitments++
 	tree.MapCommitIndices[commitment] = tree.NumCommitments
 	tree.MapCommitments[tree.NumCommitments] = commitment
-	tree.NumCommitments++
-
+	
+	// fmt.Println(tree.NumCommitments)
+	// fmt.Println(tree.MapCommitIndices[commitment])
 	return true
 }
 
@@ -134,6 +137,39 @@ func (tree *ZSLMerkleTree) getWitness(commitment string) (uint, []string) {
 	return index, uncles
 }
 
+func (tree *ZSLMerkleTree) CommitmentExists(commitment string) bool {
+	_, exists := tree.MapCommitIndices[commitment]
+	return exists
+}
+
+func (api *PublicMarkleTreeAPI) CommitmentExists(commitment string) bool {
+	return api.tree.CommitmentExists(commitment)
+}
+
+func (tree *ZSLMerkleTree) GetRoot() string {
+	return tree._calcSubtree(0, tree.TreeDepth-1)
+}
+
+func (api *PublicMarkleTreeAPI) GetRoot() string {
+	return api.tree.GetRoot()
+}
+
+func (tree *ZSLMerkleTree) GetLeafIndex(commitment string) (uint, error) {
+    mapIndex, exists := tree.MapCommitIndices[commitment]
+    if !exists {
+        return 0, fmt.Errorf("commitment does not exist in the tree")
+    }
+    return mapIndex + 1, nil
+}
+
+func (tree *ZSLMerkleTree) GetCommitmentAtLeafIndex(index uint) (string, error) {
+    if index >= tree.NumCommitments {
+        return "", fmt.Errorf("index out of range")
+    }
+    mapIndex := index + 1
+    return tree.MapCommitments[mapIndex], nil
+}
+
 func (api *PublicMarkleTreeAPI) GetWitness(commitment string) (uint, []string) {
 	return api.tree.getWitness(commitment)
 }
@@ -146,4 +182,3 @@ func (api *PublicMarkleTreeAPI) InsertCommitment(commitment string) bool {
 func (api *PublicMarkleTreeAPI) VerifyMerklePath(merklePath []string, commitment string, path uint, root string) bool {
 	return api.tree.verifyMerklePath(merklePath, commitment, path, root)
 }
-
