@@ -2,24 +2,24 @@ package main
 
 import (
 	"fmt"
-	// "log"
+	"log"
 	"reflect"
 	"encoding/hex"
     "github.com/glyff/glyff-node/common"
-	"example.com/playground/zsl"
-	"example.com/playground/merkle"
+	"zkordi/zsl"
+	"zkordi/merkle"
 )
 
 func main() {
 
-	// genParam := false
+	genParam := true
 
 	// From https://github.com/zcash/zcash/pull/994
 	// depth 29 (over 268 million possible joinsplits)
-	// merkle_depth := uint(29)
+	merkle_depth := uint(29)
 
-	// testZSL(genParam)
-	// testMerkleTree(merkle_depth)
+	testZSL(genParam)
+	testMerkleTree(merkle_depth)
 	testShieldOrd()
 }
 
@@ -35,7 +35,6 @@ func testZSL(genParam bool) {
 
 	keyPair, err := api.GenerateZKeypair()
 	fmt.Println(keyPair)
-
 	result, err := api.DebugShielding()
 
 	fmt.Println(result)
