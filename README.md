@@ -1,8 +1,8 @@
 # Research
 
-This repository contains the code for ZKORDI research project. 
+This repository contains the code for ztap research project. 
 
 
 ## Installation
 
-``` go mod init zkordi```
+``` go mod init ztap```
